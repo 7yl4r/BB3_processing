@@ -3,6 +3,12 @@ from datetime import timedelta
 from datetime import datetime
 import os
 
+from parse import parse
+
+line_fmt = (
+    '{:2d}/{:2d}/{:2d} {:2d}:{:2d}:{:2d} '
+    '{:3d} {:4d} {:3d} {:4d} {:3d} {:4d} {:4d}'
+)
 dt_fmt = "%m/%d/%y  %H:%M:%S"
 dt_prev = ""
 # will edit out when wanting to put site in at same time
@@ -17,8 +23,11 @@ f = open('new_file.raw', "r")  # can just edit this before running anything
 # use readline() to read the first line
 line_of_text = f.readline()
 while line_of_text:
-        # in python 3 print is a builtin function, so
-        time_of_sample = line_of_text[0:17]
+        parsed_line = parse(line_fmt, line_of_text)
+        time_of_sample = "{}/{}/{} {}:{}:{}".format(
+            parsed_line[0], parsed_line[1], parsed_line[2],
+            parsed_line[3], parsed_line[4], parsed_line[5s]
+        )
         # print(liness)
         for dtt in line_of_text:
             try:
