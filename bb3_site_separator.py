@@ -29,14 +29,14 @@ while line_of_text:
             parsed_line[3], parsed_line[4], parsed_line[5s]
         )
         # print(liness)
-        for dtt in line_of_text:
-            try:
-                dt = datetime.strptime(time_of_sample, dt_fmt)
-            except Exception:
-                # print(line)
-                # newfile = open('files_with_errors.txt', "a")
-                # newfile.write(line)
-                continue
+        try:
+            dt = datetime.strptime(time_of_sample, dt_fmt)
+        except Exception:
+            # print(line)
+            # newfile = open('files_with_errors.txt', "a")
+            # newfile.write(line)
+            line_of_text = f.readline()
+            continue
         if dt_prev == "":
             dt_prev = dt - timedelta(seconds=1)
         dt_new = dt
